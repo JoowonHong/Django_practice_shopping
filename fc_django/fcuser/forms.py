@@ -27,6 +27,7 @@ class RegisterForm(forms.Form):
         password = cleaned_data.get('password') 
         re_password = cleaned_data.get('re_password') 
         
+        
         if password and re_password:
             if password !=re_password:
                 self.add_error('password','비민번호가 서로 다릅니다.')
