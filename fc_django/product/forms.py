@@ -8,14 +8,12 @@ class RegisterForm(forms.Form):
     name = forms.CharField(
         error_messages={
             'required':' 상품명을 입력해주세요.'
-
         },
         max_length=64,label='상품명'
     )
     price = forms.IntegerField(
         error_messages={
             'required':' 상품가격을 입력해주세요.'
-
         },
         label='상품가격'
     )
@@ -23,7 +21,6 @@ class RegisterForm(forms.Form):
     description = forms.CharField(
         error_messages={
             'required':' 상품설명을 입력해주세요.'
-
         },
         label='상품설명'
     )
@@ -31,7 +28,6 @@ class RegisterForm(forms.Form):
     stock = forms.IntegerField(
         error_messages={
             'required':' 재고를 입력해주세요.'
-
         },
         label='재고'
     )
@@ -45,12 +41,9 @@ class RegisterForm(forms.Form):
 
 
 
-        if name and price and description and stock:
-            product = Product(
-                name= name,
-                price = price,
-                description = description,
-                stock=stock
-            )
-            product.save()
-
+        if (name and price and description and stock):
+           self.add_error('name','내용이 없습니다.')
+           self.add_error('price','내용이 없습니다.')
+           
+           
+          
