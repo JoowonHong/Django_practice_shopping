@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.hashers import check_password,make_password
+from django.contrib.auth.hashers import check_password
 from .models import Fcuser
 from django.core.exceptions import ObjectDoesNotExist
 class RegisterForm(forms.Form):
@@ -33,12 +33,7 @@ class RegisterForm(forms.Form):
             if password !=re_password:
                 self.add_error('password','비민번호가 서로 다릅니다.')
                 self.add_error('re_password','비민번호가 서로 다릅니다.')
-            else:
-                fcuser = Fcuser(
-                    email=email,
-                    password=make_password(password)
-                )
-                fcuser.save()
+            
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
@@ -69,7 +64,6 @@ class LoginForm(forms.Form):
 
             if not check_password(password, fcuser.password):
                 self.add_error('password','비밀번호가 틀렸습니다.')
-            else:
-                self.email = fcuser.email
+          
 
     
